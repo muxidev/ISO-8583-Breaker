@@ -5,7 +5,7 @@
 	@name ISO Breaker
 	@version 1.05
 	@description Ferramenta que facilita a abertura manual de uma ISO8583 a partir de um empacotador fornecido.
-	
+
 	@releases
 		@1.05 Externaliza configurações de adquirentes
 		@1.04 Exibe tamanho ao passar o mouse em cima de um valor
@@ -28,7 +28,7 @@
 		@0.03 Adaptação do layout para comportar outros projetos
 		@0.02 Leitura do empacotador e ajustes do código
 		@0.01 Primeiro release
-	
+
 	.:: Propriedade de MUXI - Grupo APPI ::.
 -->
 
@@ -60,12 +60,12 @@
 		.bitnum{color: #2196F3;}
 		.bitheader{color: #3C4888;}
 		.bitmap{color: #215A23; font-size: 15px;}
-		
+
 		#main {
 			padding: 0.5rem;
 			min-width: 910px;
 		}
-		
+
 		#iso-input, #pack-input {
 			display: inline-block;
 			padding: 0 1rem;
@@ -78,20 +78,20 @@
 		#iso-input textarea {
 			width: 100%
 		}
-		
+
 		#iso-input {
 			width: 75%
 		}
-		
+
 		#pack-input {
 			float: right;
 			width: 25%;
 		}
-		
+
 		#break-iso-options {
 			margin: 0.5rem 0;
 		}
-		
+
 		select.form-control {
 			display:inline-block
 		}
@@ -101,7 +101,7 @@
 		.logo {
 			margin-left: 1rem;
 		}
-		
+
 		#result p {
 			word-break: break-all;
 			display: inline;
@@ -464,6 +464,11 @@
 				if (spreadsheet) {
 					localStorage.setItem('IB_customDataURL', spreadsheet);
 				}
+				var iso = url.searchParams.get("iso");
+				if (iso) {
+					localStorage.setItem('IB_rawIso', iso);
+					localStorage.setItem('IB_isLog', 'false');
+				}
 
 				if (!this.hasCustomData)
 					this.loading = false;
@@ -746,7 +751,7 @@
 						this.detailedIso.size = parseInt(cleanIso.substr(0, 4), 16) * 2;
 						cleanIso = cleanIso.substr(4);
 					}
-					
+
 					if (this.tpduSize > 0) {
 						this.detailedIso.tpdu = cleanIso.substr(0, this.tpduSize);
 						cleanIso = cleanIso.substr(this.tpduSize);
@@ -1015,7 +1020,7 @@
 					for (var i = 0; i < length; i++) {
 						var bin = text[i].charCodeAt().toString(2);
 						output.push(Array(8-bin.length+1).join('0') + bin);
-					} 
+					}
 					return output.join('');
 				},
 				hexToText: function(hexx) {
