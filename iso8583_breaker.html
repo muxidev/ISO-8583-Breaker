@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 <!--
 	@author Pablo Montenegro
 	@email pmontenegro@muxi.com.br
@@ -554,7 +554,6 @@
 						reader.readAsBinaryString(f);
 					};
 					xhr.onerror = function(e) {
-						debugger;
 						alert('Error loading URL.');
 						$this.loading = false;
 					};
@@ -580,7 +579,7 @@
 							this.packagerList.push(tmpObj);
 						}
 					}
-					//this.loading = false;
+					this.loading = false;
 				},
 				parsePackager: function() {
 					var $this = this;
